@@ -1,10 +1,11 @@
-// app.js
 document.addEventListener("DOMContentLoaded", () => {
   const bookList = document.getElementById("book-list");
   const modal = document.getElementById("modal");
   const bookForm = document.getElementById("book-form");
   const saveBtn = document.getElementById("save-btn");
   const cancelBtn = document.getElementById("cancel-btn");
+  const searchInput = document.getElementById("search");
+  const addBookBtn = document.getElementById("add-book-btn");
 
   let books = [];
   let editingIndex = -1;
@@ -13,14 +14,17 @@ document.addEventListener("DOMContentLoaded", () => {
     bookList.innerHTML = "";
     books.forEach((book, index) => {
       const bookItem = document.createElement("div");
-      bookItem.className = "bg-white p-4 rounded shadow";
+      bookItem.className = "bg-white p-4 rounded-lg shadow-lg overflow-hidden";
       bookItem.innerHTML = `
-                <h3 class="text-lg font-bold">${book.title}</h3>
-                <p>${book.author}</p>
-                <p>${book.year}</p>
-                <button class="bg-blue-500 text-white px-2 py-1 rounded mt-2 edit-btn" data-index="${index}">Edit</button>
-                <button class="bg-red-500 text-white px-2 py-1 rounded mt-2 delete-btn" data-index="${index}">Delete</button>
-            `;
+          <img src="https://via.placeholder.com/150" alt="Book Image" class="w-full h-48 object-cover mb-2" />
+          <h3 class="text-lg font-bold">${book.title}</h3>
+          <p class="text-gray-600">${book.author}</p>
+          <p class="text-gray-500 text-sm">Tahun Terbit: ${book.year}</p>
+          <div class="flex justify-between mt-4">
+            <button class="bg-blue-600 text-white px-4 py-2 rounded edit-btn" data-index="${index}">Edit</button>
+            <button class="bg-red-600 text-white px-4 py-2 rounded delete-btn" data-index="${index}">Delete</button>
+          </div>
+        `;
       bookList.appendChild(bookItem);
     });
   };
@@ -31,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("modal-title").textContent = "Tambah Buku";
   };
 
-  document.getElementById("search").addEventListener("input", (e) => {
+  searchInput.addEventListener("input", (e) => {
     const query = e.target.value.toLowerCase();
     const filteredBooks = books.filter(
       (book) =>
@@ -41,12 +45,13 @@ document.addEventListener("DOMContentLoaded", () => {
     bookList.innerHTML = "";
     filteredBooks.forEach((book, index) => {
       const bookItem = document.createElement("div");
-      bookItem.className = "bg-white p-4 rounded shadow";
+      bookItem.className = "bg-white p-4 rounded-lg shadow-lg overflow-hidden";
       bookItem.innerHTML = `
-                <h3 class="text-lg font-bold">${book.title}</h3>
-                <p>${book.author}</p>
-                <p>${book.year}</p>
-            `;
+          <img src="https://via.placeholder.com/150" alt="Book Image" class="w-full h-48 object-cover mb-2" />
+          <h3 class="text-lg font-bold">${book.title}</h3>
+          <p class="text-gray-600">${book.author}</p>
+          <p class="text-gray-500 text-sm">Tahun Terbit: ${book.year}</p>
+        `;
       bookList.appendChild(bookItem);
     });
   });
@@ -88,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
     modal.classList.add("hidden");
   });
 
-  document.getElementById("add-book-btn").addEventListener("click", () => {
+  addBookBtn.addEventListener("click", () => {
     modal.classList.remove("hidden");
   });
 
