@@ -1,0 +1,172 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css");
+@import url("https://fonts.googleapis.com/css2?family=Freeman&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css");
+
+html {
+  font-size: 1vw;
+  table-layout: fixed;
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Freeman", sans-serif;
+  background-color: #f2f2f2;
+}
+
+.form-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  text-align: center;
+}
+
+h2 {
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="confirm"] {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+button:hover {
+  background-color: #307532;
+}
+
+p {
+  margin-top: 20px;
+}
+
+a {
+  color: #4caf50;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-40%);
+  cursor: pointer;
+}
+
+.fas.fa-eye {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+  color: #aaa;
+  font-size: 1.2em;
+  top: 35%;
+  transform: translateY(-50%);
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 2vw;
+  }
+
+  .form-container {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+  .fas.fa-eye {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    color: #aaa;
+    font-size: 1.2em;
+    top: 35%;
+    transform: translateY(-50%);
+  }
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #121212;
+    color: #e0e0e0;
+  }
+
+  .form-container {
+    background-color: #1e1e1e;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="confirm"] {
+    background-color: #333;
+    color: #e0e0e0;
+    border-color: #555;
+  }
+
+  button {
+    background-color: #4caf50;
+    color: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  button:hover {
+    background-color: #307532;
+  }
+
+  a {
+    color: #4caf50;
+  }
+}
