@@ -1,108 +1,127 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // DOM elements
   const bookList = document.getElementById("book-list");
-  const modal = document.getElementById("modal");
-  const bookForm = document.getElementById("book-form");
-  const saveBtn = document.getElementById("save-btn");
-  const cancelBtn = document.getElementById("cancel-btn");
   const searchInput = document.getElementById("search");
-  const addBookBtn = document.getElementById("add-book-btn");
-  const modalTitle = document.getElementById("modal-title");
 
-  let books = []; // Array to store book objects
-  let editingIndex = -1; // To track the index of the book being edited
-
-  // Function to render books to the DOM
-  const renderBooks = (bookArray = books) => {
-    bookList.innerHTML = bookArray
-      .map(
-        (book, index) => `
-        <div class="bg-white p-4 rounded-lg shadow-lg overflow-hidden">
-          <img src="https://via.placeholder.com/150" alt="Book Image" class="w-full h-48 object-cover mb-2" />
-          <h3 class="text-lg font-bold">${book.title}</h3>
-          <p class="text-gray-600">${book.author}</p>
+  // Function to render books
+  const renderBooks = (books) => {
+    bookList.innerHTML = "";
+    books.forEach((book) => {
+      const bookElement = document.createElement("div");
+      bookElement.className = "bg-white rounded-lg shadow-lg overflow-hidden";
+      bookElement.innerHTML = `
+        <img
+          src="https://cf.shopee.co.id/file/41c77417820fa1b85be7985aa5560d2d_tn"
+          alt="Book Image"
+          class="w-full h-48 object-cover"
+        />
+        <div class="p-4">
+          <h3 class="text-lg font-semibold">${book.title}</h3>
+          <p class="text-gray-600">Penulis: ${book.author}</p>
           <p class="text-gray-500 text-sm">Tahun Terbit: ${book.year}</p>
-          <div class="flex justify-between mt-4">
-            <button class="bg-blue-600 text-white px-4 py-2 rounded edit-btn" data-index="${index}">Edit</button>
-            <button class="bg-red-600 text-white px-4 py-2 rounded delete-btn" data-index="${index}">Delete</button>
-          </div>
         </div>
-      `
-      )
-      .join(""); // Convert array of book HTML to a single string and inject into DOM
+        <div class="p-4 border-t border-gray-200 flex justify-between items-center">
+          <button class="bg-blue-600 text-white px-4 py-2 rounded detail-book-btn" data-book='${JSON.stringify(
+            book
+          )}'>
+            Detail
+          </button>
+          <button class="bg-green-600 text-white px-4 py-2 rounded pinjam-book-btn" data-book='${JSON.stringify(
+            book
+          )}'>
+            Pinjam
+          </button>
+        </div>
+      `;
+
+      // Detail button event
+      bookElement
+        .querySelector(".detail-book-btn")
+        .addEventListener("click", (e) => {
+          const book = JSON.parse(e.target.getAttribute("data-book"));
+          showBookDetail(book);
+        });
+
+      // Pinjam button event
+      bookElement
+        .querySelector(".pinjam-book-btn")
+        .addEventListener("click", (e) => {
+          const book = JSON.parse(e.target.getAttribute("data-book"));
+          showSuccessNotification(book);
+        });
+
+      bookList.appendChild(bookElement);
+    });
   };
 
-  // Function to reset the form and modal state
-  const resetForm = () => {
-    bookForm.reset(); // Reset the form fields
-    editingIndex = -1; // Reset the editing index
-    modalTitle.textContent = "Tambah Buku"; // Reset modal title
+  // Function to show book detail
+  const showBookDetail = (book) => {
+    const bookDetailHTML = `
+      <div class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+        <div class="bg-white p-6 rounded-lg shadow-lg w-1/3">
+          <h2 class="text-2xl font-bold mb-2">${book.title}</h2>
+          <p class="text-gray-700 mb-4">Penulis: ${book.author}</p>
+          <p class="text-gray-500 mb-4">Tahun Terbit: ${book.year}</p>
+          <button id="close-detail-modal" class="bg-blue-600 text-white px-4 py-2 rounded">Tutup</button>
+        </div>
+      </div>
+    `;
+    document.body.insertAdjacentHTML("beforeend", bookDetailHTML);
+    document
+      .getElementById("close-detail-modal")
+      .addEventListener("click", () => {
+        document.querySelector(".fixed").remove();
+      });
   };
 
-  // Search functionality
-  searchInput.addEventListener("input", (e) => {
-    const query = e.target.value.toLowerCase();
-    const filteredBooks = books.filter(
-      (book) =>
-        book.title.toLowerCase().includes(query) ||
-        book.author.toLowerCase().includes(query)
+  // Function to show success notification
+  const showSuccessNotification = (book) => {
+    const notificationHTML = `
+      <div class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+        <div class="bg-white p-6 rounded-lg shadow-lg w-1/3">
+          <h2 class="text-xl font-bold mb-2">Berhasil Dipinjamkan</h2>
+          <p class="text-gray-700 mb-4">Buku "${book.title}" telah berhasil dipinjamkan.</p>
+          <button id="close-success-modal" class="bg-green-600 text-white px-4 py-2 rounded">Tutup</button>
+        </div>
+      </div>
+    `;
+    document.body.insertAdjacentHTML("beforeend", notificationHTML);
+    document
+      .getElementById("close-success-modal")
+      .addEventListener("click", () => {
+        document.querySelector(".fixed").remove();
+      });
+  };
+
+  // Fetch books from server
+  const fetchBooks = async () => {
+    try {
+      const response = await fetch(
+        "https://librobackend-production.up.railway.app/api/get/books"
+      ); // Adjust API endpoint as needed
+      const books = await response.json();
+      renderBooks(books);
+    } catch (error) {
+      console.error("Error fetching books:", error);
+    }
+  };
+
+  // Handle search input
+  searchInput.addEventListener("input", async (e) => {
+    const searchTerm = e.target.value.toLowerCase();
+    const books = await fetchBooks(); // Assuming fetchBooks() returns the list of books
+    const filteredBooks = books.filter((book) =>
+      book.title.toLowerCase().includes(searchTerm)
     );
-    renderBooks(filteredBooks); // Render books that match the search query
+
+    // Sort to show searched books at the top
+    const sortedBooks = [
+      ...filteredBooks,
+      ...books.filter((book) => !filteredBooks.includes(book)),
+    ];
+
+    renderBooks(sortedBooks);
   });
 
-  // Handle edit and delete actions
-  bookList.addEventListener("click", (e) => {
-    const index = e.target.dataset.index;
-    if (e.target.classList.contains("edit-btn")) {
-      editingIndex = index;
-      const book = books[index];
-      document.getElementById("book-title").value = book.title;
-      document.getElementById("book-author").value = book.author;
-      document.getElementById("book-year").value = book.year;
-      modalTitle.textContent = "Edit Buku"; // Change modal title for editing
-      modal.classList.remove("hidden"); // Show modal
-    } else if (e.target.classList.contains("delete-btn")) {
-      books.splice(index, 1); // Remove the selected book from the array
-      renderBooks(); // Re-render the list without the deleted book
-    }
-  });
-
-  // Handle save action
-  saveBtn.addEventListener("click", (e) => {
-    e.preventDefault(); // Prevent form submission
-
-    // Get form input values
-    const title = document.getElementById("book-title").value.trim();
-    const author = document.getElementById("book-author").value.trim();
-    const year = document.getElementById("book-year").value.trim();
-
-    // Check if all fields are filled
-    if (title && author && year) {
-      if (editingIndex === -1) {
-        books.push({ title, author, year }); // Add a new book
-      } else {
-        books[editingIndex] = { title, author, year }; // Update the existing book
-      }
-
-      resetForm(); // Reset the form for the next use
-      renderBooks(); // Re-render the book list
-      modal.classList.add("hidden"); // Hide the modal after saving
-    } else {
-      alert("Please fill out all fields."); // Alert if any field is missing
-    }
-  });
-
-  // Handle cancel action
-  cancelBtn.addEventListener("click", () => {
-    resetForm(); // Reset the form
-    modal.classList.add("hidden"); // Hide the modal
-  });
-
-  // Show modal to add a new book
-  addBookBtn.addEventListener("click", () => {
-    modal.classList.remove("hidden"); // Show the modal
-  });
-
-  // Initial rendering of books (if any)
-  renderBooks();
+  // Initial fetch of books
+  fetchBooks();
 });

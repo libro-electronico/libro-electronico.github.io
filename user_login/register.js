@@ -1,70 +1,43 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const loginLink = document.getElementById("login-link");
-
-  loginLink.addEventListener("click", (event) => {
-    event.preventDefault();
-    window.location.href =
-      "https://librobackend-production.up.railway.app/login.html";
-  });
-
-  const togglePassword = document.getElementById("togglePassword");
-  const password = document.getElementById("password");
-  const toggleConfirmPassword = document.getElementById(
-    "toggleConfirmPassword"
+  const registerForm = document.getElementById("register-form");
+  const emailInput = document.getElementById("register-email");
+  const passwordInput = document.getElementById("register-password");
+  const confirmPasswordInput = document.getElementById(
+    "register-confirm-password"
   );
-  const confirmPassword = document.getElementById("confirm_password");
 
-  togglePassword.addEventListener("click", () => {
-    const type =
-      password.getAttribute("type") === "password" ? "text" : "password";
-    password.setAttribute("type", type);
-    togglePassword.classList.toggle("fa-eye-slash");
-  });
+  // Register function
+  const register = async (user) => {
+    try {
+      const response = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(user),
+      });
 
-  toggleConfirmPassword.addEventListener("click", () => {
-    const type =
-      confirmPassword.getAttribute("type") === "password" ? "text" : "password";
-    confirmPassword.setAttribute("type", type);
-    toggleConfirmPassword.classList.toggle("fa-eye-slash");
-  });
-
-  document
-    .getElementById("registerForm")
-    .addEventListener("submit", async (event) => {
-      event.preventDefault();
-
-      const username = document.getElementById("username").value;
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
-      const confirmPassword = document.getElementById("confirm_password").value;
-
-      if (password !== confirmPassword) {
-        alert("Passwords nya ga sama nih...");
-        return;
-      }
-
-      const response = await fetch(
-        "https://librobackend-production.up.railway.app/api/register",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ username, email, password }),
-        }
-      );
-
-      const message = document.getElementById("message");
-      if (response.status === 201) {
-        message.textContent =
-          "Registration successful! Redirecting to login...";
-        setTimeout(() => {
-          window.location.href =
-            "https://librobackend-production.up.railway.app/";
-        }, 2000);
+      if (response.ok) {
+        // Handle successful registration (e.g., redirect to login page)
+        window.location.href = "/login.html";
       } else {
-        const errorData = await response.json();
-        message.textContent = `Error: ${errorData.error}`;
+        console.error("Registration failed:", response.statusText);
+        alert("Registration failed. Please check your details.");
       }
-    });
+    } catch (error) {
+      console.error("Error registering:", error);
+    }
+  };
+
+  // Form submission event
+  registerForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    if (passwordInput.value !== confirmPasswordInput.value) {
+      alert("Passwords do not match.");
+      return;
+    }
+    const user = {
+      email: emailInput.value,
+      password: passwordInput.value,
+    };
+    register(user);
+  });
 });

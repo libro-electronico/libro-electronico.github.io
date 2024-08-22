@@ -1,66 +1,37 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const loginLink = document.getElementById("register-link");
-  const togglePassword = document.getElementById("togglePassword");
-  const passwordField = document.getElementById("password");
-  const message = document.getElementById("message");
+  const loginForm = document.getElementById("login-form");
+  const emailInput = document.getElementById("login-email");
+  const passwordInput = document.getElementById("login-password");
 
-  // Toggle Password Visibility
-  togglePassword.addEventListener("click", () => {
-    const type =
-      passwordField.getAttribute("type") === "password" ? "text" : "password";
-    passwordField.setAttribute("type", type);
-    togglePassword.classList.toggle("fa-eye-slash");
-  });
+  // Login function
+  const login = async (credentials) => {
+    try {
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(credentials),
+      });
 
-  // Handle Login
-  document
-    .getElementById("loginForm")
-    .addEventListener("submit", async function (event) {
-      event.preventDefault();
-
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
-
-      const loginDetail = {
-        email: email,
-        password: password,
-      };
-
-      try {
-        const response = await fetch(
-          "https://librobackend-production.up.railway.app/api/login",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(loginDetail),
-          }
-        );
-
-        if (response.status === 200) {
-          message.textContent = "Login berhasil! Tunggu sebentar...";
-          setTimeout(() => {
-            window.location.href =
-              "https://librobackend-production.up.railway.app/";
-          }, 2000);
-        } else {
-          const errorData = await response.json();
-          message.textContent = `Password salah. Coba lagi.`;
-          if (errorData.error.toLowerCase().includes("password")) {
-            message.textContent = "Password salah. Coba lagi.";
-          }
-        }
-      } catch (error) {
-        message.textContent = `Wahh password nya salah nihh. Coba lagi.`;
-        console.error("Error during login:", error);
+      if (response.ok) {
+        const result = await response.json();
+        // Handle successful login (e.g., redirect to dashboard)
+        window.location.href = "/dashboard.html";
+      } else {
+        console.error("Login failed:", response.statusText);
+        alert("Login failed. Please check your credentials.");
       }
-    });
+    } catch (error) {
+      console.error("Error logging in:", error);
+    }
+  };
 
-  // Redirect to Register Page
-  loginLink.addEventListener("click", (event) => {
-    event.preventDefault();
-    window.location.href =
-      "https://librobackend-production.up.railway.app/register.html";
+  // Form submission event
+  loginForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const credentials = {
+      email: emailInput.value,
+      password: passwordInput.value,
+    };
+    login(credentials);
   });
 });
