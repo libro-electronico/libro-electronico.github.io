@@ -3,14 +3,31 @@ document.addEventListener("DOMContentLoaded", () => {
   const emailInput = document.getElementById("login-email");
   const passwordInput = document.getElementById("login-password");
 
-  // Login function
-  const login = async (credentials) => {
-    try {
-      const response = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(credentials),
-      });
+  // Handle Login
+  document
+    .getElementById("loginForm")
+    .addEventListener("submit", async function (event) {
+      event.preventDefault();
+
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      const loginDetail = {
+        email: email,
+        password: password,
+      };
+
+      try {
+        const response = await fetch(
+          "https://librobackend-production.up.railway.app/api/login",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(loginDetail),
+          }
+        );
 
       if (response.ok) {
         const result = await response.json();
