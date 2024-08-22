@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const confirmPassword = document.getElementById("confirm_password").value;
 
       if (password !== confirmPassword) {
-        alert("Passwords nya ga sama nih...");
+        alert("Passwords tidak cocok.");
         return;
       }
 
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const message = document.getElementById("message");
       if (response.status === 201) {
         message.textContent =
-          "Registration successful! Redirecting to login...";
+          "Pendaftaran berhasil! Mengalihkan ke halaman login...";
         setTimeout(() => {
           window.location.href =
             "https://librobackend-production.up.railway.app/";
