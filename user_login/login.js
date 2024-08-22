@@ -6,16 +6,20 @@ document.addEventListener("DOMContentLoaded", () => {
   // Login function
   const login = async (credentials) => {
     try {
-      const response = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(credentials),
-      });
+      const response = await fetch(
+        "https://librobackend-production.up.railway.app/post/login",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(credentials),
+        }
+      );
 
       if (response.ok) {
         const result = await response.json();
         // Handle successful login (e.g., redirect to dashboard)
-        window.location.href = "/dashboard.html";
+        window.location.href =
+          "https://libro-electronico.github.io/dashboard/dashboard.html";
       } else {
         console.error("Login failed:", response.statusText);
         alert("Login failed. Please check your credentials.");

@@ -9,15 +9,19 @@ document.addEventListener("DOMContentLoaded", () => {
   // Register function
   const register = async (user) => {
     try {
-      const response = await fetch("/api/auth/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(user),
-      });
+      const response = await fetch(
+        "https://librobackend-production.up.railway.app/post/register",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(user),
+        }
+      );
 
       if (response.ok) {
         // Handle successful registration (e.g., redirect to login page)
-        window.location.href = "/login.html";
+        window.location.href =
+          "https://libro-electronico.github.io/user_login/login.html";
       } else {
         console.error("Registration failed:", response.statusText);
         alert("Registration failed. Please check your details.");
