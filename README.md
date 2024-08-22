@@ -1,2 +1,1 @@
-# librofrontend
-vanilla js
+# libro-electronico.github.io
