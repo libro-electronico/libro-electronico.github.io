@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       const response = await fetch(
-        "https://librobackend-production.up.railway.app/api/register",
+        "https://librobackend-production.up.railway.app/post/register",
         {
           method: "POST",
           headers: {

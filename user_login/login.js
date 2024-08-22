@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       try {
         const response = await fetch(
-          "https://librobackend-production.up.railway.app/api/login",
+          "https://librobackend-production.up.railway.app/post/login",
           {
             method: "POST",
             headers: {
