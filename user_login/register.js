@@ -3,19 +3,24 @@ document.addEventListener("DOMContentLoaded", () => {
   const password = document.getElementById("password");
   const toggleConfirmPassword = document.getElementById("toggleConfirmPassword");
   const confirmPassword = document.getElementById("confirm_password");
+  const eyeIcon = document.getElementById("eyeIcon");
+  const confirmEyeIcon = document.getElementById("confirmEyeIcon");
 
+  // Toggle password visibility
   togglePassword.addEventListener("click", () => {
     const type = password.getAttribute("type") === "password" ? "text" : "password";
     password.setAttribute("type", type);
-    togglePassword.classList.toggle("fa-eye-slash");
+    eyeIcon.classList.toggle("fa-eye-slash");
   });
 
+  // Toggle confirm password visibility
   toggleConfirmPassword.addEventListener("click", () => {
     const type = confirmPassword.getAttribute("type") === "password" ? "text" : "password";
     confirmPassword.setAttribute("type", type);
-    toggleConfirmPassword.classList.toggle("fa-eye-slash");
+    confirmEyeIcon.classList.toggle("fa-eye-slash");
   });
 
+  // Handle form submission
   document.getElementById("registerForm").addEventListener("submit", async (event) => {
     event.preventDefault();
 
