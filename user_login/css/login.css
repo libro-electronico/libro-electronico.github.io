@@ -1,145 +1,145 @@
-@import url("https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css");
-@import url("https://fonts.googleapis.com/css2?family=Freeman&display=swap");
-@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css");
-
-html {
-  font-size: 1vw;
-  table-layout: fixed;
-}
-
 body {
-  height: 100vh;
+  background-color: white;
+  font-family: Arial, sans-serif;
+  padding-top: 4rem; /* Offset for fixed navbar */
   margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: "Freeman", sans-serif;
-  background-color: #f2f2f2;
 }
 
-.form-container {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 300px;
-  text-align: center;
-}
-
-h2 {
-  margin-bottom: 20px;
-}
-
-.form-group {
-  margin-bottom: 15px;
-  text-align: left;
-}
-
-label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-.input-container {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-input[type="email"],
-input[type="password"] {
-  width: 100%;
-  padding: 10px;
-  box-sizing: border-box;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-}
-
-button {
-  background-color: #4caf50;
+/* Navbar */
+nav {
+  background-color: #60a5fa;
   color: white;
-  padding: 10px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+  position: fixed;
+  top: 0;
   width: 100%;
+  z-index: 50;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  font-family: "Freeman", sans-serif;
 }
 
-button:hover {
-  background-color: #307532;
+.navbar-title {
+  font-size: 24px;
+  font-weight: bold;
 }
 
-p {
-  margin-top: 20px;
-}
-
-a {
-  color: #4caf50;
+.navbar-link {
+  background-color: #2563eb;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
   text-decoration: none;
 }
 
-a:hover {
-  text-decoration: underline;
+/* Login Section */
+section {
+  padding: 64px 16px;
+  text-align: center;
 }
 
-.fas.fa-eye {
-  position: absolute;
-  right: 10px;
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.section-subtitle {
+  font-size: 18px;
+  margin-bottom: 32px;
+}
+
+.login-box {
+  max-width: 400px;
+  margin: 0 auto;
+  background-color: white;
+  padding: 32px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.form-label {
+  display: block;
+  color: #4a4a4a;
+  margin-bottom: 8px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+}
+
+.form-button {
+  background-color: #2563eb;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: none;
   cursor: pointer;
-  color: #aaa;
-  font-size: 1.2em;
-  top: 35%;
-  transform: translateY(-50%);
+  font-size: 16px;
 }
 
-@media (max-width: 768px) {
-  html {
-    font-size: 2vw;
-  }
-
-  .form-container {
-    width: 90%;
-    padding: 15px;
-  }
+.register-link {
+  margin-top: 16px;
+  display: block;
+  color: #2563eb;
+  text-decoration: none;
 }
 
-/* Dark Mode */
-@media (prefers-color-scheme: dark) {
-  body {
-    background-color: #121212;
-    color: #e0e0e0;
-  }
+/* Footer */
+footer {
+  background-color: #60a5fa;
+  color: white;
+  padding: 32px 16px;
+  text-align: center;
+}
 
-  .form-container {
-    background-color: #1e1e1e;
-  }
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
 
-  input[type="text"],
-  input[type="email"],
-  input[type="password"] {
-    background-color: #333;
-    color: #e0e0e0;
-    border-color: #555;
-  }
+.footer-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
 
-  button {
-    background-color: #4caf50;
-    color: #e0e0e0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+.footer-icons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
 
-  button:hover {
-    background-color: #307532;
-  }
+.footer-icon {
+  color: white;
+  text-decoration: none;
+}
 
-  a {
-    color: #4caf50;
-  }
+.footer-icon svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+.footer-icon:hover {
+  color: #d1d5db;
 }

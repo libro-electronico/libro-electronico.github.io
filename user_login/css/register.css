@@ -1,172 +1,135 @@
-@import url("https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css");
-@import url("https://fonts.googleapis.com/css2?family=Freeman&display=swap");
-@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css");
-
-html {
-  font-size: 1vw;
-  table-layout: fixed;
-}
-
 body {
-  height: 100vh;
+  font-family: Arial, sans-serif;
+  background-color: white;
+  padding-top: 4rem;
   margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: "Freeman", sans-serif;
-  background-color: #f2f2f2;
 }
 
-.form-container {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 300px;
-  text-align: center;
-}
-
-h2 {
-  margin-bottom: 20px;
-}
-
-.form-group {
-  margin-bottom: 15px;
-  text-align: left;
-}
-
-label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-.input-container {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="password"],
-input[type="confirm"] {
-  width: 100%;
-  padding: 10px;
-  box-sizing: border-box;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-}
-
-button {
-  background-color: #4caf50;
+.navbar {
+  background-color: #93c5fd;
   color: white;
-  padding: 10px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+  position: fixed;
+  top: 0;
   width: 100%;
+  z-index: 50;
+  padding: 1rem 0;
+}
+
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 
-button:hover {
-  background-color: #307532;
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
-p {
-  margin-top: 20px;
-}
-
-a {
-  color: #4caf50;
+.navbar-link {
+  background-color: #2563eb;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
   text-decoration: none;
 }
 
-a:hover {
-  text-decoration: underline;
+.section {
+  padding: 4rem 1rem;
+  text-align: center;
 }
 
-.toggle-password {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-40%);
+.section-heading {
+  font-size: 2.25rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.section-subtext {
+  font-size: 1.125rem;
+  margin-bottom: 2rem;
+}
+
+.form-container {
+  max-width: 28rem;
+  margin: 0 auto;
+  background-color: white;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-label {
+  display: block;
+  color: #374151;
+  margin-bottom: 0.5rem;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.25rem;
+}
+
+.form-button {
+  background-color: #2563eb;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  border: none;
   cursor: pointer;
 }
 
-.fas.fa-eye {
-  position: absolute;
-  right: 10px;
-  cursor: pointer;
-  color: #aaa;
-  font-size: 1.2em;
-  top: 35%;
-  transform: translateY(-50%);
+.form-button:hover {
+  background-color: #1d4ed8;
 }
 
-@media (max-width: 768px) {
-  html {
-    font-size: 2vw;
-  }
-
-  .form-container {
-    width: 90%;
-    padding: 15px;
-  }
-
-  .toggle-password {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-  }
-  .fas.fa-eye {
-    position: absolute;
-    right: 10px;
-    cursor: pointer;
-    color: #aaa;
-    font-size: 1.2em;
-    top: 35%;
-    transform: translateY(-50%);
-  }
+.form-text {
+  margin-top: 1rem;
 }
 
-/* Dark Mode */
-@media (prefers-color-scheme: dark) {
-  body {
-    background-color: #121212;
-    color: #e0e0e0;
-  }
+.form-link {
+  color: #2563eb;
+  text-decoration: none;
+}
 
-  .form-container {
-    background-color: #1e1e1e;
-  }
+.footer {
+  background-color: #93c5fd;
+  color: white;
+  padding: 2rem 1rem;
+  text-align: center;
+}
 
-  input[type="text"],
-  input[type="email"],
-  input[type="password"],
-  input[type="confirm"] {
-    background-color: #333;
-    color: #e0e0e0;
-    border-color: #555;
-  }
+.footer-heading {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
 
-  button {
-    background-color: #4caf50;
-    color: #e0e0e0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+.footer-icons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
 
-  button:hover {
-    background-color: #307532;
-  }
+.footer-icon {
+  color: white;
+  text-decoration: none;
+}
 
-  a {
-    color: #4caf50;
-  }
+.footer-icon:hover {
+  color: #d1d5db;
+}
+
+.footer-icon svg {
+  width: 20px;
+  height: 20px;
 }

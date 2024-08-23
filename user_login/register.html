@@ -4,97 +4,75 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Register - Libro Electronico</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
-      rel="stylesheet"
-    />
-    <style>
-      body {
-        background-color: white;
-        padding-top: 4rem; /* Offset for fixed navbar */
-      }
-    </style>
+    <link href="css/register.css" rel="stylesheet" />
+    <script src="register.js" defer></script>
   </head>
-  <body class="font-sans">
+  <body>
     <!-- Navbar -->
-    <nav class="bg-blue-300 text-white fixed top-0 w-full z-50">
-      <div
-        class="container mx-auto px-4 py-4 flex justify-between items-center"
-      >
-        <div class="text-2xl font-bold">Libro Electronico</div>
-        <a href="index.html" class="bg-blue-600 text-white px-4 py-2 rounded"
+    <nav class="navbar">
+      <div class="navbar-container">
+        <div class="navbar-brand">Libro Electronico</div>
+        <a href="https://libro-electronico.github.io/" class="navbar-link"
           >Home</a
         >
       </div>
     </nav>
 
     <!-- Register Section -->
-    <section class="py-16">
-      <div class="container mx-auto px-4 text-center">
-        <h1 class="text-4xl font-bold mb-4">Register</h1>
-        <p class="text-lg mb-8">Daftar untuk membuat akun baru.</p>
-        <div class="max-w-md mx-auto bg-white p-8 rounded-lg shadow-lg">
+    <section class="section">
+      <div class="section-container">
+        <h1 class="section-heading">Register</h1>
+        <p class="section-subtext">Daftar untuk membuat akun baru.</p>
+        <div class="form-container">
           <form action="#" method="post">
-            <div class="mb-4">
-              <label for="name" class="block text-gray-700">Nama:</label>
+            <div class="form-group">
+              <label for="name" class="form-label">Nama:</label>
               <input
                 type="text"
                 id="name"
                 name="name"
-                class="w-full px-3 py-2 border border-gray-300 rounded"
+                class="form-input"
                 required
               />
             </div>
-            <div class="mb-4">
-              <label for="email" class="block text-gray-700">Email:</label>
+            <div class="form-group">
+              <label for="email" class="form-label">Email:</label>
               <input
                 type="email"
                 id="email"
                 name="email"
-                class="w-full px-3 py-2 border border-gray-300 rounded"
+                class="form-input"
                 required
               />
             </div>
-            <div class="mb-6">
-              <label for="password" class="block text-gray-700"
-                >Password:</label
-              >
+            <div class="form-group">
+              <label for="password" class="form-label">Password:</label>
               <input
                 type="password"
                 id="password"
                 name="password"
-                class="w-full px-3 py-2 border border-gray-300 rounded"
+                class="form-input"
                 required
               />
             </div>
-            <button
-              type="submit"
-              class="bg-blue-600 text-white px-4 py-2 rounded"
-            >
-              Register
-            </button>
+            <button type="submit" class="form-button">Register</button>
           </form>
-          <p class="mt-4">
+          <p class="form-text">
             Sudah punya akun?
-            <a href="login.html" class="text-blue-600">Login sekarang</a>
+            <a href="login.html" class="form-link">Login sekarang</a>
           </p>
         </div>
       </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-blue-300 text-white py-8">
-      <div class="container mx-auto px-4 text-center">
-        <h2 class="text-2xl font-bold mb-2">Ikuti Kami</h2>
-        <div class="flex justify-center space-x-4">
-          <a
-            href="https://github.com/libro-electronico"
-            class="hover:text-gray-300"
-          >
+    <footer class="footer">
+      <div class="footer-container">
+        <h2 class="footer-heading">Ikuti Kami</h2>
+        <div class="footer-icons">
+          <a href="https://github.com/libro-electronico" class="footer-icon">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
               viewBox="0 0 30 30"
               fill="currentColor"
             >
@@ -110,14 +88,9 @@
               ></path>
             </svg>
           </a>
-          <a
-            href="mailto:raihanaditya1506@gmail.com"
-            class="hover:text-gray-300"
-          >
+          <a href="mailto:raihanaditya1506@gmail.com" class="footer-icon">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
               viewBox="0 0 48 48"
               fill="currentColor"
             >

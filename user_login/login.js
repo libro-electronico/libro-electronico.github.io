@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const loginForm = document.getElementById("login-form");
-  const emailInput = document.getElementById("login-email");
-  const passwordInput = document.getElementById("login-password");
+  const loginForm = document.querySelector("form");
+  const emailInput = document.getElementById("email");
+  const passwordInput = document.getElementById("password");
 
   // Login function
   const login = async (credentials) => {
