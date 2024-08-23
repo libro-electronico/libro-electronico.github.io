@@ -68,7 +68,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // Fetch books from server (Placeholder)
   const fetchBooks = async () => {
     try {
-      const response = await fetch("/api/books"); // Adjust API endpoint as needed
+      const response = await fetch(
+        "https://librobackend-production.up.railway.app/api/get/books"
+      ); // Adjust API endpoint as needed
       const books = await response.json();
       renderBooks(books);
     } catch (error) {
