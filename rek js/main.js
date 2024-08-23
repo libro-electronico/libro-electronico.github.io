@@ -5,17 +5,16 @@ document.addEventListener("DOMContentLoaded", () => {
   // Function to show detail pop-out
   const showDetail = (book) => {
     const detailContent = `
-      <div class="detail-modal">
-        <div class="detail-content">
-          <h2>${book.title}</h2>
-          <p><strong>Penulis:</strong> ${book.author}</p>
-          <p><strong>Tahun:</strong> ${book.year}</p>
-          <button id="close-detail" class="close-btn">Tutup</button>
+      <div class="modal-overlay">
+        <div class="modal-content">
+          <h2 class="text-2xl font-bold mb-2">${book.title}</h2>
+          <p class="text-gray-700 mb-2"><strong>Penulis:</strong> ${book.author}</p>
+          <p class="text-gray-700 mb-2"><strong>Tahun:</strong> ${book.year}</p>
+          <button id="close-detail" class="btn btn-primary">Tutup</button>
         </div>
       </div>
     `;
     const detailModal = document.createElement("div");
-    detailModal.className = "modal-background";
     detailModal.innerHTML = detailContent;
     document.body.appendChild(detailModal);
 
@@ -27,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Function to show success notification
   const showSuccessNotification = () => {
     const notification = document.createElement("div");
-    notification.className = "notification";
+    notification.className = "notification success";
     notification.textContent = "Buku berhasil dipinjam!";
     document.body.appendChild(notification);
     setTimeout(() => {
@@ -40,29 +39,27 @@ document.addEventListener("DOMContentLoaded", () => {
     bookList.innerHTML = "";
     books.forEach((book) => {
       const bookElement = document.createElement("div");
-      bookElement.className = "book-card";
+      bookElement.className = "book-item";
       bookElement.innerHTML = `
-          <img src="${book.image}" alt="${book.title}" class="book-image" />
-          <h3 class="book-title">${book.title}</h3>
-          <p class="book-author">Penulis: ${book.author}</p>
-          <p class="book-year">Tahun Terbit: ${book.year}</p>
+          <img src="https://cf.shopee.co.id/file/41c77417820fa1b85be7985aa5560d2d_tn" alt="Book Image" class="book-image" />
+          <div class="book-details">
+            <h3 class="book-title">${book.title}</h3>
+            <p class="book-author">Penulis: ${book.author}</p>
+            <p class="book-year">Tahun Terbit: ${book.year}</p>
+          </div>
           <div class="book-actions">
-            <button class="detail-book-btn">Detail</button>
-            <button class="pinjam-book-btn">Pinjam</button>
+            <button class="detail-button">Detail</button>
+            <button class="borrow-button">Pinjam</button>
           </div>
         `;
 
-      // Detail button event
+      // Event listeners
       bookElement
-        .querySelector(".detail-book-btn")
+        .querySelector(".detail-button")
         .addEventListener("click", () => showDetail(book));
-
-      // Pinjam button event
       bookElement
-        .querySelector(".pinjam-book-btn")
-        .addEventListener("click", () => {
-          showSuccessNotification();
-        });
+        .querySelector(".borrow-button")
+        .addEventListener("click", () => showSuccessNotification());
 
       bookList.appendChild(bookElement);
     });
@@ -84,14 +81,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const query = searchInput.value.toLowerCase();
     const books = Array.from(bookList.children);
 
-    books.forEach((book) => {
-      const title = book.querySelector(".book-title").textContent.toLowerCase();
-      if (title.includes(query)) {
-        book.style.display = "block";
-      } else {
-        book.style.display = "none";
-      }
+    books.sort((a, b) => {
+      const titleA = a.querySelector(".book-title").textContent.toLowerCase();
+      const titleB = b.querySelector(".book-title").textContent.toLowerCase();
+
+      if (titleA.includes(query) && !titleB.includes(query)) return -1;
+      if (!titleA.includes(query) && titleB.includes(query)) return 1;
+      return 0;
     });
+
+    bookList.innerHTML = "";
+    books.forEach((book) => bookList.appendChild(book));
   });
 
   // Initial fetch of books
