@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       const response = await fetch(
         editingBook
-          ? `https://librobackend-production.up.railway.app/api/put/books${editingBook.id}`
+          ? `https://librobackend-production.up.railway.app/api/put/books/${editingBook.id}`
           : "https://librobackend-production.up.railway.app/api/post/books",
         {
           method: editingBook ? "PUT" : "POST",
@@ -153,8 +153,8 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Event listeners
-  addBookBtn.addEventListener("click", () => openModal());
-  closeModal.addEventListener("click", closeModalFunction);
+  addBookBtn?.addEventListener("click", () => openModal());
+  closeModal?.addEventListener("click", closeModalFunction);
 
   // Initial fetch of books
   fetchBooks();
