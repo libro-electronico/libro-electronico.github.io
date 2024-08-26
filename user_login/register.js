@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // Get elements by their IDs
   const registerForm = document.getElementById("register-form");
   const emailInput = document.getElementById("register-email");
   const passwordInput = document.getElementById("register-password");
@@ -6,7 +7,13 @@ document.addEventListener("DOMContentLoaded", () => {
     "register-confirm-password"
   );
 
-  // Register function
+  // Ensure all elements are found
+  if (!registerForm || !emailInput || !passwordInput || !confirmPasswordInput) {
+    console.error("One or more form elements not found!");
+    return;
+  }
+
+  // Register function to handle user registration
   const register = async (user) => {
     try {
       const response = await fetch(
@@ -19,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
       );
 
       if (response.ok) {
-        // Handle successful registration (e.g., redirect to login page)
+        // Handle successful registration
         window.location.href =
           "https://librobackend-production.up.railway.app/post/login.html";
       } else {
@@ -28,20 +35,27 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     } catch (error) {
       console.error("Error registering:", error);
+      alert("An error occurred during registration. Please try again later.");
     }
   };
 
-  // Form submission event
+  // Form submission event handler
   registerForm.addEventListener("submit", (e) => {
     e.preventDefault();
+
+    // Validate that passwords match
     if (passwordInput.value !== confirmPasswordInput.value) {
       alert("Passwords do not match.");
       return;
     }
+
+    // Create a user object from the form data
     const user = {
       email: emailInput.value,
       password: passwordInput.value,
     };
+
+    // Call the register function with the user data
     register(user);
   });
 });
