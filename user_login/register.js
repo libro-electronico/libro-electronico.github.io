@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (response.ok) {
         // Handle successful registration
         window.location.href =
-          "https://librobackend-production.up.railway.app/post/login.html";
+          "https://libro-electronico.github.io/user_login/login.html";
       } else {
         console.error("Registration failed:", response.statusText);
         alert("Registration failed. Please check your details.");
